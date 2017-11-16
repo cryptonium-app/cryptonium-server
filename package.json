@@ -1,0 +1,37 @@
+{
+  "name": "cryptonium-server",
+  "version": "0.0.1",
+  "description": "backend server for cryptonium extension ",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "crypto",
+    "cryptocurrency",
+    "blockchain"
+  ],
+  "author": "sagarkarira1992@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "callsite": "^1.0.0",
+    "colors": "^1.1.2",
+    "config": "^1.28.1",
+    "debug": "^3.1.0",
+    "eslint": "^4.11.0",
+    "express": "^4.16.2",
+    "fs-extra": "^4.0.2",
+    "fs-promise": "^2.0.3",
+    "joi": "^13.0.2",
+    "lodash": "^4.17.4",
+    "moment": "^2.19.2",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "pretty-error": "^2.1.1",
+    "redis": "^2.8.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  }
+}
