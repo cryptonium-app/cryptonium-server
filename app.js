@@ -1,12 +1,16 @@
 'use strict';
 
 if (process.env.NODE_ENV !== 'dev' &&
-    process.env.NODE_ENV !== 'prod') {
+    process.env.NODE_ENV !== 'prod' &&
+    process.env.NODE_ENV !== 'test'
+    ) {
 
     console.log(
     `Please specify one of the following environments to run your server
+            - test
             - dev
             - prod
+
             
     Example : NODE_ENV=dev pm2 start app.js`
     );
@@ -36,6 +40,7 @@ const updater = require('./routes/updater');
 /** Routes **/
 const ico = require('./routes/ico');
 const scam = require('./routes/scam');
+const report = require('./routes/report');
 const wrapper = require('./routes/wrapper');
 
 /** Socket **/
@@ -74,8 +79,17 @@ app.get('/ping', function (req, res) {
 //     res.render('home.ejs');
 // });
 
+
+//ICO APIs
 app.get('/api/ico', ico.allICO);
+
+// Scam APIs
 app.get('/api/scam/analysis', scam.analysis);
+
+
+app.post('/api/report/insert', report.insert);
+
+// API wrapper
 app.get('/api/wrapper', wrapper.apiWrapper);
 
 // app.get('/editor/:editorName', editor.initialize);

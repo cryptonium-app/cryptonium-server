@@ -1,8 +1,17 @@
 {
     "port" : 9000, 
+    
+    "dbConfig" : {
+    	"host" : "" , 
+        "user" : "analyticsv2",
+        "password" : "5ABv0GVmI2tIA4Mf",
+        "database" : "analytics", 
+        "connectionLimit" : 100
+    },
+
     "redisConfig" : {
         "host": "localhost",
         "port": "6379",
         "db": 0
-      }
+    }
 }

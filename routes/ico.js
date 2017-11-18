@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * Module : ico 
+ * Description : All ICO related apis and methods
+ * Author : sagarkarira1992@gmail.com
+ * Created : 17/11/17
+ */
 
 module.exports = {
 	allICO
@@ -16,6 +22,13 @@ const parameters = require('./parameters');
 const logconf = {
 	loggingEnabled : true
 };
+
+/**
+ * View ICO data API
+ * @param  {[type]} req [description]
+ * @param  {[type]} res [description]
+ * @return {[type]}     [description]
+ */
 
 function allICO(req, res) {
 	logging.trace(logconf, ' Get All ICOs', req.body, req.query);

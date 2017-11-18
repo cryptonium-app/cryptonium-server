@@ -8,7 +8,7 @@ const Promise = require('bluebird');
 let redisClient = redis.createClient(config.get('redisConfig'));
 
 redisClient.on('connect', function(){
-	redisClient.flushall();
+	// redisClient.flushall();
     console.log('Connected to redis. Listening on port : ' + config.get('redisConfig').port);
 });
 

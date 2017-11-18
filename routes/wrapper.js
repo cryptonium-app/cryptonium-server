@@ -1,5 +1,13 @@
 'use strict';
 
+/**
+ * Module : wrapper
+ * Description : A wrapper made to fetch data from 
+ * 				 other apis and save it in redis.
+ * Author : sagarkarira1992@gmail.com
+ * Created : 17/11/17
+ */
+
 module.exports = {
 	apiWrapper
 };

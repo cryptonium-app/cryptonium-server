@@ -12,12 +12,12 @@ const dbHandlerPromisified = require('../routes/dbHandler').dbHandlerPromisified
 // const logging = require('../libs/logger');
 
 const MODEL_NAME = 'Report';
-const TABLE = 'tb_reports';
+const TABLE = 'tb_report';
 const columns = [
     'report_id', 
-    'currency', 
+    'coin', 
     'wallet_address', 
-    'domain_name', 
+    'url', 
     'reason', 
     'created_at'
 ];
@@ -25,9 +25,9 @@ const columns = [
 const PRIMARY_KEY = 'report_id';
 const FILTERS = [
     'report_id', 
-    'currency', 
+    'coin', 
     'wallet_address', 
-    'domain_name'
+    'url'
 ];
 
 exports.view = (logconf = {}, opts = {}) => {
@@ -55,10 +55,10 @@ exports.view = (logconf = {}, opts = {}) => {
 exports.insert = (logconf = {}, insertInfo) => {
     return new Promise((resolve, reject)=>{
         const schema = Joi.object().keys({
-            currency : Joi.string().required(null) , 
-            wallet_address : Joi.string().required(null),
-            domain_name : Joi.string().allow(),
-            reason : Joi.string().allow(null),
+            coin : Joi.string().allow(null) , 
+            wallet_address : Joi.string().allow(null),
+            url : Joi.string().required(),
+            reason : Joi.string().allow(null)
         });
 
         const validation = Joi.validate(insertInfo, schema);
@@ -94,9 +94,9 @@ exports.insert = (logconf = {}, insertInfo) => {
 //         let primaryKey = updateInfo[`${PRIMARY_KEY}`];
 //         const schema = Joi.object().keys({
 //             reason_id : Joi.number().required(),
-//             currency : Joi.string().required(null) , 
+//             coin : Joi.string().required(null) , 
 //             wallet_address : Joi.string().required(null),
-//             domain_name : Joi.string().allow(),
+//             url : Joi.string().allow(),
 //             reason : Joi.string().allow(null),
 //         });
 //         const validation = Joi.validate(updateInfo, schema);

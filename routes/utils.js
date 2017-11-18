@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * Module : updater
+ * Description : List of utility methods
+ * Author : sagarkarira1992@gmail.com
+ * Created : 17/11/17
+ */
+
 module.exports = {
     sendGzippedResponse,
     sendErrorResponse,
@@ -10,11 +17,10 @@ module.exports = {
     extendQueryForFilters
 };
 
-const zlib = require('zlib');
 const Promise = require('bluebird');
 const request = require('request');
 const rp = require('request-promise');
-
+const zlib = require('zlib');
 const logging = require('../libs/logging');
 // const statusCodes = require('./statusCodes');
 

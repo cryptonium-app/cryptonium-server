@@ -1,0 +1,16 @@
+{
+    "port" : 9000, 
+    "redisConfig" : {
+        "host": "localhost",
+        "port": "6379",
+        "db": 0
+    }, 
+
+    "dbConfig" : {
+    	"host" : "127.0.0.1", 
+        "user" : "root",
+        "password" : "sagark",
+        "database" : "cryptonium", 
+        "connectionLimit" : 100
+    }
+}

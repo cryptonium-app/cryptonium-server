@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * Module : updater
+ * Description : Regulary fetches latest data for ICOs and Ether Scams
+ * Author : sagarkarira1992@gmail.com
+ * Created : 17/11/17
+ */
+
 const Promise = require('bluebird');
 const redisClient = require('../libs/redis');
 
@@ -12,15 +19,15 @@ const logconf = {
 	loggingEnabled : true
 };
 
-const UPDATE_INTERVAL = 1000 * 60 * 15  // 15 minutes
+const UPDATE_INTERVAL = 1000 * 60 * 100  // 15 minutes
 
-updater(logconf)
-		.then(()=>{
-			logging.trace(logconf, `Fetched data from API list`);
-		})
-		.catch((error)=>{
-			logging.error(logconf, error);
-		});
+// updater(logconf)
+// 		.then(()=>{
+// 			logging.trace(logconf, `Fetched data from API list`);
+// 		})
+// 		.catch((error)=>{
+// 			logging.error(logconf, error);
+// 		});
 
 setInterval(function(){
 	updater(logconf)
