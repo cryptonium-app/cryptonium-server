@@ -103,7 +103,7 @@ async function analysisInternal(logconf) {
 		totalScams, 
 		activeScams, 
 		inactiveScams, 
-		domainsListed
+		walletAddresses
 	};
 }
 
