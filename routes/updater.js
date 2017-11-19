@@ -21,13 +21,13 @@ const logconf = {
 
 const UPDATE_INTERVAL = 1000 * 60 * 100  // 15 minutes
 
-// updater(logconf)
-// 		.then(()=>{
-// 			logging.trace(logconf, `Fetched data from API list`);
-// 		})
-// 		.catch((error)=>{
-// 			logging.error(logconf, error);
-// 		});
+updater(logconf)
+		.then(()=>{
+			logging.trace(logconf, `Fetched data from API list`);
+		})
+		.catch((error)=>{
+			logging.error(logconf, error);
+		});
 
 setInterval(function(){
 	updater(logconf)
