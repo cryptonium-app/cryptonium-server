@@ -85,6 +85,7 @@ app.get('/api/ico', ico.allICO);
 
 // Scam APIs
 app.get('/api/scam/analysis', scam.analysis);
+app.get('/api/scam/search', scam.search);
 
 
 app.post('/api/report/insert', report.insert);

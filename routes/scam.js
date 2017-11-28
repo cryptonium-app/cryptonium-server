@@ -8,7 +8,8 @@
  */
 
 module.exports = {
-	analysis
+	analysis, 
+	search
 };
 
 const Promise = require('bluebird');
@@ -49,33 +50,76 @@ function analysis(req, res) {
  * @param  {[type]} res [description]
  * @return {[type]}     [description]
  */
-// function search(req, res) {
-// 	logging.trace(logconf, 'Scam Search', req.body, req.query);
-// 	const url = req.query.url;
-// 	const etherScamResult  = await searchInEtherScam(logconf, url);
-// 	if (etherScamResult === 0) {
-// 		let response = {
-// 			flag : 200, 
-// 			message : 'No scam found', 
-// 			data : []
-// 		};
-// 		return res.send(response);
-// 	}
 
-// 	let response = {
-// 		flag : 200, 
-// 		message : 'Careful, Scam found',
-// 		data : etherScamResult
-// 	};
-// 	return res.send(response);
-// }
+function search(req, res) {
+	logging.trace(logconf, 'Scam Search Request', req.body, req.query);
+	const url = req.query.url || req.body.url;
+	const filterUrl = url.replace('http://', '').replace('https://', '').replace('www.', '');
+	searchInternal(logconf, filterUrl).then((result)=>{
+		return utils.sendGzippedResponse(logconf, result, res);
+	});
+	
+}
 
-// async function searchInEtherScam(logconf, url) {
-// 	const scamRedisKey = paramerts.redisKeys.SCAMS;
-// 	let scamData = await redisClient.getAsync(scamRedisKey);
-// 	scamData = JSON.parse(scamData);
-// 	_.find(scamData, _.matchesProperty('domain', url));
-// }
+
+async function searchInternal(logconf, url) {
+
+	const etherScamResult  = await searchInEtherScam(logconf, url);
+	
+	if (etherScamResult === undefined) {
+		const internalScamResult = await searchInDatabase(logconf, url);
+		if (internalScamResult.length === 0  ) {
+			let response = {
+				flag : 200, 
+				message : 'No scam found'
+			};
+			return response;
+		}
+
+		let response = {
+			flag : 200, 
+			message : 'Scam Found ', 
+			data : internalScamResult[0]
+		};
+		return response;
+	}
+
+	let response = {
+		flag : 200, 
+		message : 'Scam Found ', 
+		data : etherScamResult
+	};
+	return response;
+}
+
+async function searchInEtherScam(logconf, url) {
+	const scamRedisKey = parameters.redisKey.SCAMS;
+	let scamData = await redisClient.getAsync(scamRedisKey);
+	scamData = JSON.parse(scamData);
+	for (let i in scamData) {
+		let scamObj = scamData[i];	
+		if (scamObj['name'] === url) {
+			return scamObj;
+		}		
+	}
+}
+
+function searchInDatabase(logconf, url) {
+	let query = 
+	`
+		select *
+		from 
+			tb_scam
+		where name LIKE ?
+	`;
+
+	let queryObj = {
+	    query: query,
+	    args: [url],
+	    event: "Search scam url"
+	};
+	return dbHandlerPromisified.executeQuery(logconf, queryObj);
+}
 
 
 async function analysisInternal(logconf) {
